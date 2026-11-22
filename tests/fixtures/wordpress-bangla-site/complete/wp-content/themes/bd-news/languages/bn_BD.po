@@ -1,0 +1,12 @@
+msgid ""
+msgstr ""
+"Language: bn_BD\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Read more"
+msgstr "আরও পড়ুন"
+
+msgid "Latest news"
+msgstr "সর্বশেষ খবর"
+

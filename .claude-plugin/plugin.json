@@ -1,0 +1,14 @@
+{
+  "name": "bangla-localization-skills",
+  "displayName": "Bangla Localization Skills",
+  "version": "0.1.0",
+  "description": "Agent Skills for Bangla (Bengali) + English software and content: UI translation with placeholder parity checks, hard-coded string extraction, Bangla numbers, taka and dates, typography, SEO, Unicode normalization, WordPress bn_BD and spelling/style.",
+  "author": {
+    "name": "Saizul Amin",
+    "url": "https://github.com/saizul"
+  },
+  "homepage": "https://github.com/saizul/bangla-localization-skills",
+  "repository": "https://github.com/saizul/bangla-localization-skills",
+  "license": "MIT",
+  "keywords": ["bangla", "bengali", "bangladesh", "i18n", "l10n", "localization", "translation", "unicode", "wordpress", "seo"]
+}

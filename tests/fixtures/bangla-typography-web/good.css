@@ -1,0 +1,41 @@
+/* Latin first, Bengali second: each script picks the font that has its glyphs. */
+@font-face {
+  font-family: "Hind Siliguri";
+  src: url("/fonts/hind-siliguri-400.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+  unicode-range: U+0980-09FE, U+200C-200D, U+25CC, U+0964-0965;
+}
+
+@font-face {
+  font-family: "Hind Siliguri";
+  src: url("/fonts/hind-siliguri-600.woff2") format("woff2");
+  font-weight: 600;
+  font-display: swap;
+  unicode-range: U+0980-09FE, U+200C-200D, U+25CC, U+0964-0965;
+}
+
+body {
+  font-family: "Inter", "Hind Siliguri", "Noto Sans Bengali", sans-serif;
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+h1, h2 {
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.code {
+  font-family: ui-monospace, monospace;
+  letter-spacing: normal;
+}
+
+:lang(en) .eyebrow {
+  letter-spacing: 0.08em;
+}
+
+:lang(bn) em {
+  font-style: normal;
+  font-weight: 600;
+}

@@ -1,0 +1,15 @@
+msgid ""
+msgstr ""
+"Language: bn_BD\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Add to cart"
+msgstr "কার্টে যোগ করুন"
+
+msgid "Checkout"
+msgstr "চেকআউট"
+
+msgid "Order received"
+msgstr "অর্ডার পাওয়া গেছে"
+

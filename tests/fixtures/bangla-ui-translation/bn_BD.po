@@ -1,0 +1,33 @@
+# Bangla translation for the demo shop.
+msgid ""
+msgstr ""
+"Language: bn_BD\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Add to cart"
+msgstr "কার্টে যোগ করুন"
+
+#, php-format
+msgid "%s comment"
+msgid_plural "%s comments"
+msgstr[0] "%sটি মন্তব্য"
+msgstr[1] "%sটি মন্তব্য"
+
+msgctxt "verb"
+msgid "Post"
+msgstr "প্রকাশ করুন"
+
+#, php-format
+msgid "Hello %1$s, you have %2$d new messages."
+msgstr "হ্যালো %1$s, আপনার %2$dটি নতুন বার্তা আছে।"
+
+msgid ""
+"Your order has been placed. "
+"We will email you when it ships."
+msgstr ""
+"আপনার অর্ডার গ্রহণ করা হয়েছে। "
+"পণ্য পাঠানো হলে আমরা আপনাকে ইমেইল করব।"
+
+msgid "Read <strong>more</strong>"
+msgstr "<strong>আরও</strong> পড়ুন"

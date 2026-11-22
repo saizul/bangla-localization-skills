@@ -1,0 +1,18 @@
+msgid ""
+msgstr ""
+"Language: bn_BD\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Dashboard"
+msgstr "ড্যাশবোর্ড"
+
+msgid "Posts"
+msgstr "পোস্ট"
+
+msgid "Settings"
+msgstr "সেটিংস"
+
+msgid "Log Out"
+msgstr "লগ আউট"
+

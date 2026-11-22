@@ -1,0 +1,16 @@
+{
+  "nav": {
+    "home": "Home",
+    "settings": "Settings"
+  },
+  "greeting": "Hello, {name}!",
+  "cart": {
+    "items": "{count, plural, one {# item} other {# items}} in your cart"
+  },
+  "welcome": "Welcome back, {{user}}",
+  "terms": "I agree to the <a>Terms</a> and <b>Privacy Policy</b>.",
+  "upload": "Uploaded %1$s of %2$s files",
+  "save": "Save",
+  "reply": "{gender, select, male {He} female {She} other {They}} replied",
+  "deleted": "Item deleted."
+}

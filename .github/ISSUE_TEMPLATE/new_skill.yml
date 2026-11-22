@@ -1,0 +1,48 @@
+name: New skill proposal
+description: Propose a new skill (or offer to write one)
+labels: ["new skill"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Good skills solve one recurring Bangla localization task end to end, give the agent exact
+        steps and decision points, and include a tested helper script when that adds reliability.
+        See CONTRIBUTING.md and templates/skill/SKILL.md.
+  - type: input
+    id: name
+    attributes:
+      label: Skill name
+      description: lowercase-with-hyphens, max 64 characters
+      placeholder: "bangla-android-strings"
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What task does it handle, and when should the agent use it?
+      description: Example user requests that should trigger it.
+    validations:
+      required: true
+  - type: textarea
+    id: workflow
+    attributes:
+      label: Proposed workflow
+      description: Steps, exact commands, decision points, what the output looks like.
+  - type: textarea
+    id: script
+    attributes:
+      label: Helper script (optional)
+      description: What would a deterministic script check or generate? Inputs, outputs, exit codes.
+  - type: textarea
+    id: sources
+    attributes:
+      label: Language sources
+      description: Standards, dictionaries or style guides the skill should follow (e.g. Bangla Academy rules, CLDR).
+    validations:
+      required: true
+  - type: checkboxes
+    id: help
+    attributes:
+      label: Contribution
+      options:
+        - label: I would like to write this skill

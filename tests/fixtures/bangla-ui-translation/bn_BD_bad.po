@@ -1,0 +1,22 @@
+msgid ""
+msgstr ""
+"Language: bn_BD\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Add to cart"
+msgstr ""
+
+#, fuzzy, php-format
+msgid "%s comment"
+msgid_plural "%s comments"
+msgstr[0] "%sটি মন্তব্য"
+
+#, php-format
+msgid "Hello %1$s, you have %2$d new messages."
+msgstr "হ্যালো, আপনার %2$dটি নতুন বার্তা আছে।"
+
+msgid "Read <strong>more</strong>"
+msgstr "আরও পড়ুন"
+
+msgid "Old string"
+msgstr "পুরনো লেখা"

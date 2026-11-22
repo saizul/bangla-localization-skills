@@ -1,0 +1,27 @@
+{
+  "name": "bangla-localization-skills",
+  "description": "Agent Skills for building Bangla (Bengali) + English software and content.",
+  "owner": {
+    "name": "Saizul Amin",
+    "url": "https://github.com/saizul"
+  },
+  "plugins": [
+    {
+      "name": "bangla-localization-skills",
+      "source": "./",
+      "description": "Bangla UI translation with placeholder checks, i18n string extraction, Bangla numbers/BDT/dates/Bangla calendar, web typography, Bangla SEO and Banglish keywords, Unicode normalization, WordPress bn_BD, spelling and style.",
+      "category": "localization",
+      "tags": ["bangla", "bengali", "i18n", "l10n", "localization", "translation", "unicode", "wordpress", "seo", "typography"],
+      "skills": [
+        "./skills/bangla-ui-translation",
+        "./skills/i18n-key-extraction",
+        "./skills/bangla-number-date-format",
+        "./skills/bangla-typography-web",
+        "./skills/bangla-seo-content",
+        "./skills/bangla-text-normalization",
+        "./skills/wordpress-bangla-site",
+        "./skills/bangla-spellcheck-style"
+      ]
+    }
+  ]
+}
