@@ -10,6 +10,7 @@ Subcommands:
   date      Gregorian date in Bangla (রবিবার, ২২ নভেম্বর ২০২৬; ordinal ২২শে নভেম্বর)
   bangabda  Bangla calendar date (revised Bangladesh civil calendar, 2019): ৭ অগ্রহায়ণ ১৪৩৩
   time      12-hour Bangla time with part of day (বিকাল ৩টা ৪৫ মিনিট / বিকাল ৩:৪৫)
+  phone     validate and normalise Bangladeshi mobile numbers (০১৭১১-২২৩৩৪৪ -> +8801711223344)
 
 Standard library only. Exit codes: 0 = ok, 2 = invalid input.
 """
@@ -379,6 +380,55 @@ def format_time(t: dt.time, style: str = "clock", digits: str = "bn") -> str:
     return to_bn_digits(text) if digits == "bn" else text
 
 
+# Original operator by prefix. Since mobile number portability (2018) a number may have moved.
+MOBILE_OPERATORS = {
+    "13": "Grameenphone",
+    "14": "Banglalink",
+    "15": "Teletalk",
+    "16": "Robi (Airtel)",
+    "17": "Grameenphone",
+    "18": "Robi",
+    "19": "Banglalink",
+}
+PHONE_STYLES = ("e164", "local", "bn", "intl")
+
+
+def normalize_bd_mobile(text: str) -> dict:
+    """Validate a Bangladeshi mobile number and return it in every display style.
+
+    Accepts Bangla or Latin digits, spaces, dashes, dots and brackets, and the forms
+    01XXXXXXXXX, 1XXXXXXXXX, 8801XXXXXXXXX, +8801XXXXXXXXX, 008801XXXXXXXXX and +880 01XXXXXXXXX.
+    """
+    raw = to_en_digits(text).strip()
+    s = re.sub(r"[\s\-.()\u00a0]", "", raw)
+    if s.startswith("+"):
+        s = s[1:]
+    elif s.startswith("00"):
+        s = s[2:]
+    if re.fullmatch(r"8801\d{9}", s):
+        national = s[3:]
+    elif re.fullmatch(r"88001\d{9}", s):  # +880 0171... (trunk zero kept by mistake)
+        national = s[4:]
+    elif re.fullmatch(r"01\d{9}", s):
+        national = s[1:]
+    elif re.fullmatch(r"1\d{9}", s):
+        national = s
+    else:
+        raise ValueError(f"not a Bangladeshi mobile number: {text!r}")
+    prefix = national[:2]
+    if prefix not in MOBILE_OPERATORS:
+        raise ValueError(f"unknown mobile prefix 0{prefix} in {text!r} (valid: 013-019)")
+    local = f"0{national[:4]}-{national[4:]}"
+    return {
+        "input": text,
+        "e164": f"+880{national}",
+        "local": local,
+        "bn": to_bn_digits(local),
+        "intl": f"+880 {national[:4]}-{national[4:]}",
+        "operator": MOBILE_OPERATORS[prefix],
+    }
+
+
 def _date(value: str) -> dt.date:
     if value == "today":
         return dt.date.today()
@@ -449,6 +499,10 @@ def build_parser() -> argparse.ArgumentParser:
     s.add_argument("time", type=_time, help="HH:MM, 24-hour")
     s.add_argument("--style", choices=["clock", "spoken"], default="clock")
     s.add_argument("--digits", choices=["bn", "en"], default="bn")
+
+    s = sub.add_parser("phone", help="validate/normalise Bangladeshi mobile numbers")
+    s.add_argument("text", nargs="+", help="numbers in any common form, Bangla or Latin digits")
+    s.add_argument("--style", choices=PHONE_STYLES, default="e164", help="output style (default e164)")
     return p
 
 
@@ -484,6 +538,9 @@ def run(args) -> tuple[str | list[str], dict]:
     if args.cmd == "bangabda":
         text = format_bangabda(args.date, args.ordinal, not args.no_era, args.weekday, args.digits)
         return text, {"result": text, "iso": args.date.isoformat(), **bangabda(args.date)}
+    if args.cmd == "phone":
+        info = [normalize_bd_mobile(t) for t in args.text]
+        return [i[args.style] for i in info], {"results": info}
     text = format_time(args.time, args.style, args.digits)
     return text, {"result": text}
 

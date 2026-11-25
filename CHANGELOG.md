@@ -6,6 +6,12 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+### Added
+
+- `bangla-number-date-format`: `bn_format.py phone` validates Bangladeshi mobile numbers in any
+  common form (Bangla or Latin digits, `01...`, `+880...`, `00880...`) and prints them as E.164,
+  local (`01711-223344`), Bangla-digit or international style; `--json` adds the prefix operator.
+
 ## [0.1.0] - 2026-11-22
 
 ### Added
