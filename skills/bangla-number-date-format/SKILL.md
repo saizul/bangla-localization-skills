@@ -1,6 +1,6 @@
 ---
 name: bangla-number-date-format
-description: Format numbers, money and dates for Bangla (bn-BD) correctly - Bangla digits (০-৯) and back, lakh/crore grouping (১২,৩৪,৫৬৭), compact হাজার/লক্ষ/কোটি, BDT/taka amounts (৳ ১,২৩,৪৫৬.০০, টাকা), amounts in words for invoices and cheques (এক লক্ষ ... টাকা মাত্র), Gregorian dates with Bangla month and weekday names, ordinal dates (২১শে ফেব্রুয়ারি), the Bangla calendar (Bangabda, revised Bangladesh calendar: ১লা বৈশাখ ১৪৩৩) and 12-hour time with সকাল/দুপুর/বিকাল/রাত. Includes a deterministic CLI, reference tables and Intl/ICU/PHP/Python/WordPress code patterns. Use when the user needs Bangla number, currency, taka, date, calendar, Pohela Boishakh or time formatting, converts between Bangla and English digits, parses Bangla numeric input, or asks why Intl output differs.
+description: Format numbers, money and dates for Bangla (bn-BD) correctly - Bangla digits (০-৯) and back, lakh/crore grouping (১২,৩৪,৫৬৭), compact হাজার/লক্ষ/কোটি, BDT/taka amounts (৳ ১,২৩,৪৫৬.০০, টাকা), amounts in words for invoices and cheques (এক লক্ষ ... টাকা মাত্র), Gregorian dates with Bangla month and weekday names, ordinal dates (২১শে ফেব্রুয়ারি), the Bangla calendar (Bangabda, revised Bangladesh calendar: ১লা বৈশাখ ১৪৩৩) 12-hour time with সকাল/দুপুর/বিকাল/রাত, and Bangladeshi mobile numbers (+880 E.164). Includes a deterministic CLI, reference tables and Intl/ICU/PHP/Python/WordPress code patterns. Use when the user needs Bangla number, currency, taka, date, calendar, Pohela Boishakh or time formatting, converts between Bangla and English digits, parses Bangla numeric input, or asks why Intl output differs.
 license: MIT
 compatibility: Python 3.8+ (standard library only) for scripts/bn_format.py.
 metadata:
@@ -51,8 +51,12 @@ Paths below are relative to this skill's folder (in Claude Code: `${CLAUDE_SKILL
    python3 scripts/bn_format.py time 15:45                          # বিকাল ৩:৪৫
    python3 scripts/bn_format.py parse "১২,৩৪,৫৬৭.৫০"                # 1234567.50
    python3 scripts/bn_format.py digits --to en "০১৭১১-২২৩৩৪৪"        # 01711-223344
+   python3 scripts/bn_format.py phone "০১৭১১-২২৩৩৪৪" "+880 1911 223344"   # +8801711223344, +8801911223344
+   python3 scripts/bn_format.py phone 01711223344 --style bn       # ০১৭১১-২২৩৩৪৪ (also: local, intl)
    ```
    Exit 2 means invalid input (for example a malformed number); report it, do not guess.
+   Store phone numbers as E.164 (`+8801XXXXXXXXX`) and format them only for display. The
+   `operator` field in `--json` output is the prefix's original operator; ported numbers may differ.
 3. **Implement in code** with the platform's locale data where possible, using the patterns in
    [references/platform-apis.md](references/platform-apis.md) (JavaScript `Intl`, PHP `intl`,
    Python Babel, Django, WordPress filters). Use the script's output as the expected value in

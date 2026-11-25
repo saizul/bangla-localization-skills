@@ -194,3 +194,60 @@ def test_cli():
     assert run_script(SKILL, SCRIPT, "words", "12.5").returncode == 2
     assert run_script(SKILL, SCRIPT, "time", "25:00").returncode == 2
     assert run_script(SKILL, SCRIPT, "--help").returncode == 0
+
+
+@pytest.mark.parametrize(
+    "raw",
+    [
+        "01711223344",
+        "01711-223344",
+        "০১৭১১-২২৩৩৪৪",
+        "+8801711223344",
+        "+880 1711-223344",
+        "8801711223344",
+        "008801711223344",
+        "+880 01711 223344",
+        "1711223344",
+        "(017) 11.22.33.44",
+    ],
+)
+def test_phone_accepts_common_forms(raw):
+    info = bf.normalize_bd_mobile(raw)
+    assert info["e164"] == "+8801711223344"
+    assert info["local"] == "01711-223344"
+    assert info["bn"] == "০১৭১১-২২৩৩৪৪"
+    assert info["intl"] == "+880 1711-223344"
+    assert info["operator"] == "Grameenphone"
+
+
+@pytest.mark.parametrize(
+    "prefix, operator",
+    [
+        ("013", "Grameenphone"),
+        ("014", "Banglalink"),
+        ("015", "Teletalk"),
+        ("016", "Robi (Airtel)"),
+        ("018", "Robi"),
+        ("019", "Banglalink"),
+    ],
+)
+def test_phone_operator_by_prefix(prefix, operator):
+    assert bf.normalize_bd_mobile(prefix + "12345678")["operator"] == operator
+
+
+@pytest.mark.parametrize(
+    "raw", ["0171122334", "017112233445", "01211223344", "02-9123456", "+911711223344", ""]
+)
+def test_phone_rejects(raw):
+    with pytest.raises(ValueError):
+        bf.normalize_bd_mobile(raw)
+
+
+def test_phone_cli():
+    r = run_script(SKILL, SCRIPT, "phone", "০১৭১১-২২৩৩৪৪", "+880 1911 223344")
+    assert r.returncode == 0 and r.stdout.split() == ["+8801711223344", "+8801911223344"]
+    r = run_script(SKILL, SCRIPT, "phone", "01711223344", "--style", "bn")
+    assert r.stdout.strip() == "০১৭১১-২২৩৩৪৪"
+    r = run_script(SKILL, SCRIPT, "--json", "phone", "01511223344")
+    assert json.loads(r.stdout)["results"][0]["operator"] == "Teletalk"
+    assert run_script(SKILL, SCRIPT, "phone", "12345").returncode == 2
